@@ -5,8 +5,12 @@ def print_head(df, save_figure):
     print(df.head())
 
 def tasks_by_user(df, save_figure):
-    users = df.owner.unique()
-    print(users, type(users))
+    tasks_per_user = df.owner.value_counts()
+    vals = list(tasks_per_user.values)[:20]
+    labels = list(tasks_per_user.index)[:20]
+    plt.title("Top 20 users by number of BLT jobs run")
+    plt.bar( labels, vals,)
+
     if not save_figure:
         plt.show()
     else:
