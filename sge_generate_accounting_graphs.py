@@ -45,7 +45,7 @@ def tasks_by_host(df, save_figure):
     tasks_per_host = df.hostname.value_counts()
     vals = list(tasks_per_host.values)[:20]
     labels = list(tasks_per_host.index)[:20]
-    plt.title("Number of tasks by Host type")
+    plt.title("Number of tasks by Host")
     plt.bar( labels, vals,)
 
     if not save_figure:
