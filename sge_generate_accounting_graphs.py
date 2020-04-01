@@ -19,7 +19,7 @@ def tasks_by_user(df, save_figure):
 
 def task_lengths_hist(df, save_figure):
     lengths = df.ru_wallclock
-    bins = np.linspace(0, 40000, 100)
+    bins = np.linspace(0, 400000, 100)
     plt.hist(lengths, bins=bins, log=True)
     plt.title("Histogram of BLT Job Run Times (Seconds)")
     plt.ylabel("Frequency (Log scale)")
