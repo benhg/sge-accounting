@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 def print_head(df, save_figure):
@@ -16,6 +17,17 @@ def tasks_by_user(df, save_figure):
     else:
         plt.savefig("somefig.png")
 
+def task_lengths_hist(df, save_figure):
+    lengths = df.ru_wallclock
+    bins = np.linspace(0, 40000, 100)
+    plt.hist(lengths, bins=bins, log=True)
+    plt.title("Histogram of BLT Job Run Times (Seconds)")
+    plt.ylabel("Frequency (Log scale)")
+    plt.xlabel("Run time (sec). [Truncated]")
+    if not save_figure:
+        plt.show()
+    else:
+        plt.savefig("somefig.png")
 
 if __name__ == '__main__':
     import argparse
