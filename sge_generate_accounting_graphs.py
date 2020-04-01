@@ -1,14 +1,23 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
-def print_head(df):
+def print_head(df, save_figure):
     print(df.head())
+
+def tasks_by_user(df, save_figure):
+    if not save_figure:
+        plt.show()
+    else:
+        plt.savefig("somefig.png")
+
 
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--task", help="Task to run. Must be name of a function in this object.", type=str, required=True)
     parser.add_argument("--input", help="Path to accounting file. Must be readable by user.", type=str, required=True)
+    parser.add_argument("--save_figure", help="If this is specified, save figure instead of showing plot", action="store_true")
     args = parser.parse_args()
     schema = ["qname", "hostname", "group", "owner", "job_name", "job_number", "account", "priority", "submission_time", "start_time", "end_time", "failed", "exit_status", "ru_wallclock", "project", "department", "granted_pe", "slots", "task_number", "cpu", "mem", "io", "category", "iow", "pe_taskid", "maxvmem", "arid", "ar_submission_time"]
     input_df = pd.read_csv(args.input, sep=":", names=schema, skiprows=4)
-    eval(args.task)(input_df)
+    eval(args.task)(input_df, args.save_figure)
