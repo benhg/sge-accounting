@@ -29,6 +29,18 @@ def task_lengths_hist(df, save_figure):
     else:
         plt.savefig("somefig.png")
 
+def tasks_by_type(df, save_figure):
+    tasks_per_user = df.category.value_counts()
+    vals = list(tasks_per_user.values)[:20]
+    labels = list(tasks_per_user.index)[:20]
+    plt.title("Number of tasks by job type")
+    plt.bar( labels, vals,)
+
+    if not save_figure:
+        plt.show()
+    else:
+        plt.savefig("somefig.png")
+
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
